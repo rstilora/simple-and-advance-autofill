@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Auto fil</title>
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            box-sizing: border-box;
+            /*box-shadow: -1px 3px 7px 3px #ccc;*/
+            padding: 11px 8px;
+            
+            border:none;
+            background:transparent;
+            border-bottom:1px solid #00b8e1;transition:all ease 0.5s;
+        }
+            input:focus { 
+               outline-color:#00b8e1;transition:all ease 0.5s;
+            }
+
+        body {
+            background: #fff;
+        }
+
+
+        .autofill_main {
+            position: relative;
+            max-width: 100%;
+            width: 350px;
+            margin: 50px auto;
+        }
+
+        .datalist {
+            position: absolute;
+            top: 36px;
+            left: 0px;
+            background: #eee;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+            .datalist li {
+                list-style: none;
+                border-bottom: 1px solid #ddd;
+                padding: 8px 4px;
+                color: #5c5c5c;
+                text-transform: capitalize;
+                font-size: 15px;
+                transition:all ease 0.5s;
+            }
+
+                .datalist li i {
+                    color: black;
+                    font-style: normal;
+                }
+
+                .datalist li:focus {
+                    background: #ddd;
+                }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+
+    <select class="rs_autocomplete">
+        <option>Ghanerao</option>
+        <option>Jhalawar</option>
+        <option>Ganganagar</option>
+        <option>Dungarpur</option>
+        <option>Banswara</option>
+        <option>Rohet</option>
+        <option>Sariska</option>
+        <option>Mandawa</option>
+        <option>Kota</option>
+        <option>Jaipur</option>
+        <option>Jodhpur</option>
+        <option>Udaipur</option>
+        <option>Jaisalmer</option>
+        <option>Pushkar</option>
+        <option>Shekhawati</option>
+        <option>Bharatpur</option>
+        <option>Ajmer</option>
+    </select>
+
+
+
+    <script src="main.js"></script>
+</body>
+</html>

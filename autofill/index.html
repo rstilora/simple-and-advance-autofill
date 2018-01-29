@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Auto fil</title>
+
+
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        input {
+            padding: 8px;
+            width: 100%;
+            border: 2px solid #dcdcdc;
+            box-sizing: border-box;
+        }
+
+
+        .autofill_main {
+            position: relative;
+            max-width: 100%;
+            width: 200px;
+            margin: 50px auto;
+        }
+
+        .citylist {
+            position: absolute;
+            top: 36px;
+            left: 0px;
+            background: #323232;
+            width: 100%;
+            max-height:150px;
+            overflow-y:auto;
+        }
+
+            .citylist li {
+                list-style: none;
+                border-bottom: 1px solid #000;
+                padding: 4px;
+                color: #fff;
+                text-transform: capitalize;
+                font-size: 13px;
+            }
+
+                .citylist li:focus {
+                    background: blue;
+                }
+    </style>
+
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="autofill_main">
+        
+        <input id="typ_citytext" type="text" onkeyup="searchCity();" />
+
+    </div>
+
+    <script>
+
+
+        var closelList;
+
+        var typValue;
+        var cityList = ["Ghanerao", "Sawai Madhopur", "Rohet", "Jhalawar", "Hanumangarh", "Ganganagar", "Dungarpur", "Banswara", "Sariska", "Samode", "Mandawa", "Kota", "Jaipur", "Jodhpur", "Udaipur", "Jaisalmer", "Pushkar", "Shekhawati", "Bharatpur", "Ajmer", "Mount Abu", "Alwar", "Bikaner", "Chittorgarh", "Bundi", "Khimsar"]
+
+        //cityList = cityList.toLowerCase();
+        $.each(cityList, function (index, item) {
+            cityList[index] = item.toLowerCase();
+        });
+        function searchCity() {
+
+            typValue = document.getElementById("typ_citytext").value;
+
+           
+            $(".citylist li").remove();
+            if (typValue != "") {
+
+                for (var i = 0; i < cityList.length; i++) {
+                    var bar = typValue.toLowerCase();
+
+                    if (cityList[i].indexOf(bar) > -1) {
+                        // alert(i);
+                        $(".citylist").append("<li tabindex='-1' id='list" + i + "'>" + cityList[i] + "</li>");
+                       
+                        selectC();
+                    }
+                };
+            }
+        }
+
+
+
+
+        $("#typ_citytext").focus(function () {
+            if (document.getElementById("citylist")) {
+
+
+            }
+            else {
+                $(".autofill_main").append("<ul class='citylist' id='citylist'></ul>");
+            }
+            
+
+        });
+
+        //$("#typ_citytext ").focusout(function () {
+
+        //   
+
+        //});
+
+        function selectC() {
+            $(".citylist li").click(function () {
+                $(".citylist li").removeClass('active');
+                $(this).addClass("active");
+                selectCity = $(this).text();
+                console.log(selectCity);
+
+                closelList = false;
+
+                $("#typ_citytext").val(selectCity);
+                //$(".citylist").remove();
+
+            });
+        }
+
+
+        $(document).on('keydown', '.citylist li', function () {
+            console.log(event.keyCode)
+            if (event.keyCode == 40) {
+                var currentNextLi = '.citylist li:eq(' + ($(this).index() + 1) + ')';
+                $(currentNextLi).focus();
+                $('#typ_citytext').val($(currentNextLi).html());
+            }
+            else if (event.keyCode == 38) {
+                if (($(this).index()) > 0) {
+
+                    var currentNextLi = '.citylist li:eq(' + ($(this).index() - 1) + ')';
+                    $(currentNextLi).focus();
+
+                    $('#typ_citytext').val($(currentNextLi).html());
+
+                } else {
+                    $('#typ_citytext').focus();
+                }
+            } else if (event.keyCode == 27) {
+
+                $(".citylist").remove();
+
+            } else if (event.keyCode == 13) {
+
+                $(".citylist").remove();
+
+            } else {
+
+                $('#typ_citytext').focus();
+            }
+        });
+
+        $(document).on('keydown', '#typ_citytext', function () {
+            if (event.keyCode == 40) {
+                $('.citylist li:eq(0)').focus();
+            }
+        });
+
+
+    </script>
+
+
+</body>
+</html>
